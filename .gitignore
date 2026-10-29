@@ -1,0 +1,16 @@
+# Dependensi
+node_modules/
+
+# Data pengguna: JANGAN pernah di-commit (berisi hash password & token sesi)
+data/
+*.corrupt-*
+
+# Foto profil yang diunggah pengguna
+uploads/
+
+# Berkas sementara saat menulis database
+*.tmp
+
+# Log & sistem operasi
+*.log
+.DS_Store

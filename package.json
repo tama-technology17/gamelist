@@ -1,0 +1,17 @@
+{
+  "name": "gamelist",
+  "version": "1.0.0",
+  "description": "Katalog game free-to-play dari FreeToGame API, dengan akun dan profil pengguna.",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2"
+  }
+}

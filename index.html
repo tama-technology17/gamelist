@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0c0a1a">
+  <meta name="description" content="GameList: katalog game free-to-play dengan data dari FreeToGame API.">
+  <title>GameList - Katalog Game Free-to-Play</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Sora:wght@700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Terapkan tema + putuskan animasi pembuka SEBELUM render pertama.
+    try {
+      // `store.set()` di app.js menulis JSON, jadi nilainya bisa bernilai `"light"`.
+      // Parsing di sini membuat nilai yang ditulis manual lewat DevTools juga aman.
+      var t = localStorage.getItem('gamelist:theme');
+      if (t) { try { t = JSON.parse(t); } catch (e) {} }
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      else if (matchMedia('(prefers-color-scheme: light)').matches) document.documentElement.dataset.theme = 'light';
+      // Intro hanya sekali per sesi; penghuni berikutnya langsung ke konten.
+      var fresh = !sessionStorage.getItem('gamelist:seen');
+      sessionStorage.setItem('gamelist:seen', '1');
+      if (fresh && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.dataset.intro = '1';
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="boot" aria-hidden="true"><span class="boot-logo">GameList</span></div>
+  <a class="skip" href="#view">Lewati ke konten</a>
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="#/">GameList</a>
+      <nav class="menu" id="menu" aria-label="Navigasi utama">
+        <a href="#/" data-route="home">Beranda</a>
+        <a href="#/games" data-route="games">Katalog</a>
+        <a href="#/favorites" data-route="favorites">Favorit <span class="badge" id="fav-count" hidden>0</span></a>
+      </nav>
+      <div class="nav-actions">
+        <span class="account-slot" id="account-nav"></span>
+        <button class="icon-btn" id="theme" type="button" aria-label="Ganti tema" title="Ganti tema"></button>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="menu"></button>
+      </div>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+  </header>
+
+  <main class="wrap" id="view" tabindex="-1"></main>
+
+  <footer>
+    <div class="wrap">Data game dari <a href="https://www.freetogame.com" target="_blank" rel="noopener noreferrer">FreeToGame.com</a>. Semua merek dagang milik pemiliknya masing-masing.</div>
+  </footer>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <button class="top" id="to-top" type="button" aria-label="Kembali ke atas" hidden></button>
+
+  <noscript><p style="padding:2rem;text-align:center">GameList membutuhkan JavaScript agar dapat memuat data game.</p></noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
